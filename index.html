@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual de Consignado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Outfit', sans-serif;
+            background: #a565e1;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(20px);
+            border-radius: 25px;
+            box-shadow: 0 20px 40px rgba(165, 101, 225, 0.3);
+            overflow: hidden;
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                transform: translateY(50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .header {
+            background: #fe65c4;
+            padding: 40px 30px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            50% { transform: translate(10px, -10px) rotate(180deg); }
+        }
+
+        .header h1 {
+            color: white;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            position: relative;
+            z-index: 2;
+        }
+
+        .header .subtitle {
+            color: rgba(255,255,255,0.9);
+            font-size: 1.1rem;
+            font-weight: 400;
+            position: relative;
+            z-index: 2;
+        }
+
+        .content {
+            padding: 30px;
+        }
+
+        .section {
+            margin-bottom: 35px;
+            transform: translateY(20px);
+            opacity: 0;
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; } 
+        .section:nth-child(4) { animation-delay: 0.8s; }
+        .section:nth-child(5) { animation-delay: 1s; }
+        .section:nth-child(6) { animation-delay: 1.2s; }
+
+        @keyframes fadeInUp {
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .section-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: #a565e1;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-icon {
+            width: 30px;
+            height: 30px;
+            background: #fe65c4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .section-content {
+            background: rgba(165, 101, 225, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+        }
+
+        .requirement-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .requirement-list li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: #333;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .requirement-list li .list-icon {
+            position: absolute;
+            left: 0;
+            color: #fe65c4;
+            font-size: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .percentage-card {
+            background: #a565e1;
+            color: white;
+            padding: 25px;
+            border-radius: 20px;
+            text-align: center;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(165, 101, 225, 0.3);
+        }
+
+        .percentage-split {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 15px;
+        }
+
+        .percentage-item {
+            text-align: center;
+        }
+
+        .percentage-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+        
+        .percentage-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .stats-card {
+            background: rgba(254, 101, 196, 0.1);
+            border: 2px solid rgba(254, 101, 196, 0.2);
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .stats-number {
+            font-size: 2.8rem;
+            font-weight: 800;
+            color: #fe65c4;
+            line-height: 1;
+        }
+
+        .stats-label {
+            color: #666;
+            font-size: 1rem;
+            margin-top: 8px;
+        }
+
+        .testimonial {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 15px 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #555;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 10px;
+        }
+
+        .testimonial-author {
+            color: #a565e1;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .calculator {
+            background: rgba(165, 101, 225, 0.08);
+            padding: 25px;
+            border-radius: 20px;
+            margin: 20px 0;
+        }
+
+        .calculator-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid rgba(165, 101, 225, 0.2);
+            border-radius: 12px;
+            font-size: 1.1rem;
+            font-family: 'Outfit', sans-serif;
+            margin-bottom: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .calculator-input:focus {
+            outline: none;
+            border-color: #fe65c4;
+            box-shadow: 0 0 0 3px rgba(254, 101, 196, 0.1);
+        }
+
+        .calculator-result {
+            background: #fe65c4;
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .result-value {
+            font-size: 2.2rem;
+            font-weight: 800;
+            line-height: 1;
+        }
+
+        .result-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 8px;
+        }
+
+        .text-content {
+            color: #444;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .highlight {
+            background: rgba(254, 101, 196, 0.2);
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 600;
+            color: #a565e1;
+        }
+
+        .cta-button {
+            background: #a565e1;
+            color: white;
+            padding: 18px 30px;
+            border: none;
+            border-radius: 35px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            font-family: 'Outfit', sans-serif;
+            cursor: pointer;
+            width: 100%;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(165, 101, 225, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 40px rgba(165, 101, 225, 0.4);
+        }
+
+        .floating-elements {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .floating-circle {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(254, 101, 196, 0.1);
+            animation: floatRandom 8s ease-in-out infinite;
+        }
+
+        .circle-1 {
+            width: 80px;
+            height: 80px;
+            top: 10%;
+            left: 10%;
+            animation-delay: 0s;
+        }
+
+        .circle-2 {
+            width: 60px;
+            height: 60px;
+            top: 70%;
+            right: 15%;
+            animation-delay: 2s;
+        }
+
+        .circle-3 {
+            width: 100px;
+            height: 100px;
+            bottom: 20%;
+            left: 5%;
+            animation-delay: 4s;
+        }
+
+        @keyframes floatRandom {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(20px, -20px) scale(1.1); }
+            50% { transform: translate(-15px, 15px) scale(0.9); }
+            75% { transform: translate(25px, 5px) scale(1.05); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                margin: 0;
+                border-radius: 0;
+                min-height: 100vh;
+            }
+            
+            .header {
+                padding: 30px 20px;
+            }
+            
+            .content {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <div class="floating-circle circle-1"></div>
+        <div class="floating-circle circle-2"></div>
+        <div class="floating-circle circle-3"></div>
+    </div>
+
+    <div class="container">
+        <div class="header">
+            <h1>Manual de Consignado</h1>
+            <p class="subtitle">Transforme seu guarda-roupa em renda extra</p>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-question"></i> 
+                    </div>
+                    O que é Consignado?
+                </div>
+                <div class="section-content">
+                    <p class="text-content">
+                        O <span class="highlight">consignado</span> é uma parceria onde você disponibiliza suas roupas em nosso brechó e recebe uma porcentagem toda vez que uma peça é vendida. É uma forma sustentável e inteligente de dar nova vida às suas roupas e ainda ganhar dinheiro!
+                    </p>
+                </div>
+            </div>
+
+            <div class="section" id="section-requisitos"> 
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    Requisitos das Peças
+                </div>
+                <div class="section-content">
+                    <p class="text-content">Para garantir a qualidade do nosso brechó, suas peças devem estar:</p>
+                    <ul class="requirement-list">
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Em excelente estado de conservação
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Limpas e sem odores
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Sem avarias, rasgos ou manchas
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Com etiquetas originais (quando possível)
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Peças da moda atual ou atemporais
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Tamanhos variados e populares
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-pagamento"> <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-percent"></i>
+                    </div>
+                    Como Funciona o Pagamento
+                </div>
+                <div class="section-content">
+                    <div class="percentage-card">
+                        <h3 style="margin-bottom: 15px; font-weight: 600;">Divisão dos Valores</h3>
+                        <div class="percentage-split">
+                            <div class="percentage-item">
+                                <div class="percentage-number" data-target-value="40">0%</div> <div class="percentage-label">Para Você</div>
+                            </div>
+                            <div class="percentage-item">
+                                <div class="percentage-number" data-target-value="60">0%</div> <div class="percentage-label">Para o Brechó</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-content">
+                        A cada venda, você recebe <span class="highlight">40% do valor</span>. Os 60% restantes ficam com o brechó para cobrir os custos operacionais, que incluem:
+                    </p>
+                    <ul class="requirement-list">
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Preparação das roupas: lavagem, secagem e uso de produtos de limpeza adequados.
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Marketing da peça: divulgação para atrair compradores.
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Logística de venda: todo o processo de venda e entrega para outros clientes.
+                        </li>
+                        <li>
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Manutenção do espaço: custos de aluguel, luz, água e demais despesas.
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section" id="section-sucesso"> <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    Nosso Sucesso
+                </div>
+                <div class="section-content">
+                    <div class="stats-card">
+                        <div class="stats-number" id="animatedStatsNumber">0+</div>
+                        <div class="stats-label">Peças Vendidas com Sucesso</div>
+                    </div>
+                    <p class="text-content" style="margin-top: 15px;">
+                        Já vendemos mais de <span class="highlight">200 peças</span> em regime de consignado, provando que nosso sistema funciona e gera resultados reais para nossas parceiras!
+                    </p>
+                </div>
+            </div>
+
+            <div class="section" id="section-clientes"> 
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-comment-dots"></i>
+                    </div>
+                    O que Dizem Nossas Clientes
+                </div>
+                <div class="section-content">
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Coloquei 10 peças no brechó e já consegui vender 7! O dinheiro extra veio na hora certa e minhas roupas tiveram uma segunda chance."</p>
+                        <p class="testimonial-author">- Maria Silva</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Adorei a experiência! Além de ganhar dinheiro, senti que estava contribuindo para um consumo mais consciente."</p>
+                        <p class="testimonial-author">- Ana Costa</p>
+                    </div>
+                    <div class="testimonial">
+                        <p class="testimonial-text">"Processo super fácil e transparente. Recebo relatórios das vendas e o pagamento sempre em dia!"</p>
+                        <p class="testimonial-author">- Julia Santos</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section" id="section-calculadora"> 
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    Calculadora de Ganhos
+                </div>
+                <div class="section-content">
+                    <div class="calculator">
+                        <label for="preco" style="display: block; margin-bottom: 10px; font-weight: 600; color: #a565e1;">
+                            Digite o valor de venda da sua peça:
+                        </label>
+                        <input 
+                            type="number" 
+                            id="preco" 
+                            class="calculator-input" 
+                            placeholder="Ex: 50,00" 
+                            step="0.01"
+                            oninput="calcularGanho()"
+                        >
+                        <div class="calculator-result" id="resultado" style="display: none;">
+                            <div class="result-value" id="valorGanho">R$ 0,00</div>
+                            <div class="result-label">Você vai receber (40%)</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="cta-button" onclick="window.location.href='#contato'">
+                Quero Começar Agora!
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function calcularGanho() {
+            const preco = parseFloat(document.getElementById('preco').value);
+            const resultado = document.getElementById('resultado');
+            const valorGanho = document.getElementById('valorGanho');
+            
+            if (preco && preco > 0) {
+                const ganho = preco * 0.4;
+                valorGanho.textContent = `R$ ${ganho.toFixed(2).replace('.', ',')}`;
+                resultado.style.display = 'block';
+                resultado.style.animation = 'fadeInUp 0.5s ease-out';
+            } else {
+                resultado.style.display = 'none';
+            }
+        }
+
+        // Função para animar qualquer número crescente
+        function animateNumberCount(element, start, end, duration, suffix = '') {
+            let current = start;
+            const range = end - start;
+            const increment = end > start ? 1 : -1;
+            const stepTime = Math.abs(Math.floor(duration / range));
+
+            // Limpa qualquer timer anterior para este elemento
+            if (element._animationTimer) {
+                clearInterval(element._animationTimer);
+            }
+
+            element._animationTimer = setInterval(() => {
+                current += increment;
+                element.textContent = current + suffix;
+                if (current === end) {
+                    clearInterval(element._animationTimer);
+                    element._animationTimer = null; // Limpa o timer após a conclusão
+                }
+            }, stepTime);
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            // Observer para animações gerais de section (fadeInUp)
+            const generalObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animationPlayState = 'running';
+                    }
+                });
+            }, { threshold: 0.2 }); // Dispara quando 20% da seção está visível
+            
+            sections.forEach(section => {
+                generalObserver.observe(section);
+            });
+
+            // --- Observador para a seção "Como Funciona o Pagamento" (porcentagens) ---
+            const paymentSection = document.getElementById('section-pagamento');
+            let paymentAnimationTriggered = false; // Flag para garantir que a animação só ocorra uma vez
+
+            if (paymentSection) {
+                const percentageNumbers = paymentSection.querySelectorAll('.percentage-number');
+                
+                const paymentObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !paymentAnimationTriggered) {
+                            percentageNumbers.forEach(numberElement => {
+                                const targetValue = parseInt(numberElement.dataset.targetValue);
+                                // Inicia a animação de contagem para cada porcentagem
+                                animateNumberCount(numberElement, 0, targetValue, 1000, '%'); // Anima de 0 até o valor alvo em 1 segundo
+                            });
+                            
+                            paymentAnimationTriggered = true; // Define a flag como true
+                            paymentObserver.unobserve(entry.target); // Para de observar após animar
+                        }
+                    });
+                }, { threshold: 0.6 }); // A animação dispara quando 60% da seção está visível
+
+                paymentObserver.observe(paymentSection);
+            }
+
+            // --- Observador para a seção "Nosso Sucesso" (número 200+) ---
+            const successSection = document.getElementById('section-sucesso');
+            const animatedStatsNumber = document.getElementById('animatedStatsNumber');
+            let successAnimationTriggered = false; // Flag para garantir que a animação só ocorra uma vez
+
+            if (successSection) {
+                const successObserver = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting && !successAnimationTriggered) {
+                            if (animatedStatsNumber) {
+                                animateNumberCount(animatedStatsNumber, 0, 200, 1500, '+'); // Anima de 0 a 200 em 1.5 segundos
+                            }
+                            successAnimationTriggered = true; // Define a flag como true
+                            successObserver.unobserve(entry.target); // Para de observar após animar
+                        }
+                    });
+                }, { threshold: 0.5 }); // A animação dispara quando 50% da seção está visível
+
+                successObserver.observe(successSection);
+            }
+        });
+    </script>
+</body>
+</html>
