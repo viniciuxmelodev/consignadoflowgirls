@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manual de Consignado</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -36,6 +38,7 @@
                 transform: translateY(50px);
                 opacity: 0;
             }
+
             to {
                 transform: translateY(0);
                 opacity: 1;
@@ -57,13 +60,20 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
             animation: float 6s ease-in-out infinite;
         }
 
         @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            50% { transform: translate(10px, -10px) rotate(180deg); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+
+            50% {
+                transform: translate(10px, -10px) rotate(180deg);
+            }
         }
 
         .header h1 {
@@ -71,13 +81,13 @@
             font-size: 2.2rem;
             font-weight: 800;
             margin-bottom: 10px;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
             position: relative;
             z-index: 2;
         }
 
         .header .subtitle {
-            color: rgba(255,255,255,0.9);
+            color: rgba(255, 255, 255, 0.9);
             font-size: 1.1rem;
             font-weight: 400;
             position: relative;
@@ -95,12 +105,45 @@
             animation: fadeInUp 0.6s ease-out forwards;
         }
 
-        .section:nth-child(1) { animation-delay: 0.2s; }
-        .section:nth-child(2) { animation-delay: 0.4s; }
-        .section:nth-child(3) { animation-delay: 0.6s; } 
-        .section:nth-child(4) { animation-delay: 0.8s; }
-        .section:nth-child(5) { animation-delay: 1s; }
-        .section:nth-child(6) { animation-delay: 1.2s; }
+        /* Ajuste dos atrasos para as novas seções */
+        .section:nth-child(1) {
+            animation-delay: 0.2s;
+        }
+
+        .section:nth-child(2) {
+            animation-delay: 0.4s;
+        }
+
+        .section:nth-child(3) {
+            /* Nova seção: Não trabalhamos com */
+            animation-delay: 0.6s;
+        }
+
+        .section:nth-child(4) {
+            /* Nova seção: Precificação das Peças */
+            animation-delay: 0.8s;
+        }
+
+        .section:nth-child(5) {
+            /* Como Funciona o Pagamento (original 3) */
+            animation-delay: 1s;
+        }
+
+        .section:nth-child(6) {
+            /* Nosso Sucesso (original 4) */
+            animation-delay: 1.2s;
+        }
+
+        .section:nth-child(7) {
+            /* O que Dizem Nossas Clientes (original 5) */
+            animation-delay: 1.4s;
+        }
+
+        .section:nth-child(8) {
+            /* Calculadora de Ganhos (original 6) */
+            animation-delay: 1.6s;
+        }
+
 
         @keyframes fadeInUp {
             to {
@@ -161,6 +204,49 @@
             transform: translateY(-50%);
         }
 
+        /* Estilo para a nova lista de exclusão */
+        .exclusion-list {
+            list-style: none;
+            margin: 15px 0;
+        }
+
+        .exclusion-list li {
+            padding: 8px 0;
+            font-size: 0.95rem;
+            color: #333;
+            position: relative;
+            padding-left: 25px;
+        }
+
+        .exclusion-list li .list-icon-times {
+            position: absolute;
+            left: 0;
+            color: #fe65c4;
+            font-size: 1.1rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        /* Estilo para a lista de precificação com números */
+        .pricing-list {
+            list-style: decimal;
+            /* Números */
+            margin: 15px 0 15px 25px;
+            /* Adiciona margem para os números */
+            color: #333;
+            line-height: 1.6;
+            font-size: 0.95rem;
+        }
+
+        .pricing-list li {
+            margin-bottom: 10px;
+        }
+
+        .pricing-list li:last-child {
+            margin-bottom: 0;
+        }
+
+
         .percentage-card {
             background: #a565e1;
             color: white;
@@ -186,7 +272,7 @@
             font-weight: 800;
             line-height: 1;
         }
-        
+
         .percentage-label {
             font-size: 0.9rem;
             opacity: 0.9;
@@ -219,7 +305,7 @@
             padding: 20px;
             border-radius: 15px;
             margin: 15px 0;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
         }
 
         .testimonial-text {
@@ -358,10 +444,23 @@
         }
 
         @keyframes floatRandom {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            25% { transform: translate(20px, -20px) scale(1.1); }
-            50% { transform: translate(-15px, 15px) scale(0.9); }
-            75% { transform: translate(25px, 5px) scale(1.05); }
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            25% {
+                transform: translate(20px, -20px) scale(1.1);
+            }
+
+            50% {
+                transform: translate(-15px, 15px) scale(0.9);
+            }
+
+            75% {
+                transform: translate(25px, 5px) scale(1.05);
+            }
         }
 
         @media (max-width: 480px) {
@@ -370,17 +469,18 @@
                 border-radius: 0;
                 min-height: 100vh;
             }
-            
+
             .header {
                 padding: 30px 20px;
             }
-            
+
             .content {
                 padding: 20px;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="floating-elements">
         <div class="floating-circle circle-1"></div>
@@ -391,25 +491,27 @@
     <div class="container">
         <div class="header">
             <h1>Manual de Consignado</h1>
-            <p class="subtitle">Transforme seu guarda-roupa em renda extra</p>
+            <p class="subtitle">Transforme seu guarda-roupa em renda extra!</p>
         </div>
 
         <div class="content">
             <div class="section">
                 <div class="section-title">
                     <div class="section-icon">
-                        <i class="fas fa-question"></i> 
+                        <i class="fas fa-question"></i>
                     </div>
                     O que é Consignado?
                 </div>
                 <div class="section-content">
                     <p class="text-content">
-                        O <span class="highlight">consignado</span> é uma parceria onde você disponibiliza suas roupas em nosso brechó e recebe uma porcentagem toda vez que uma peça é vendida. É uma forma sustentável e inteligente de dar nova vida às suas roupas e ainda ganhar dinheiro!
+                        O <span class="highlight">consignado</span> é uma parceria onde você disponibiliza suas roupas
+                        em nosso brechó e recebe uma porcentagem toda vez que uma peça é vendida. É uma forma
+                        sustentável das suas roupas ganharem novas histórias e você ganhar um dinheiro!
                     </p>
                 </div>
             </div>
 
-            <div class="section" id="section-requisitos"> 
+            <div class="section" id="section-requisitos">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-check"></i>
@@ -420,28 +522,77 @@
                     <p class="text-content">Para garantir a qualidade do nosso brechó, suas peças devem estar:</p>
                     <ul class="requirement-list">
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Em excelente estado de conservação
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Em excelente estado de
+                            conservação
                         </li>
                         <li>
                             <span class="list-icon"><i class="fas fa-check-circle"></i></span> Limpas e sem odores
                         </li>
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Sem avarias, rasgos ou manchas
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Sem avarias, rasgos ou
+                            manchas
                         </li>
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Com etiquetas originais (quando possível)
-                        </li>
-                        <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Peças da moda atual ou atemporais
-                        </li>
-                        <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Tamanhos variados e populares
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Com etiquetas originais
+                            (quando possível)
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="section" id="section-pagamento"> <div class="section-title">
+            <div class="section" id="section-nao-trabalhamos">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fa-solid fa-circle-xmark"></i>
+                    </div>
+                    Não Trabalhamos Com:
+                </div>
+                <div class="section-content">
+                    <ul class="exclusion-list">
+                        <li>
+                            <span class="list-icon-times"><i class="fa-solid fa-xmark"></i></span> Peças masculinas
+                        </li>
+                        <li>
+                            <span class="list-icon-times"><i class="fa-solid fa-xmark"></i></span> Peças infantis
+                        </li>
+                        <li>
+                            <span class="list-icon-times"><i class="fa-solid fa-xmark"></i></span> Produtos não
+                            relacionados a roupas
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="section" id="section-precificacao">
+                <div class="section-title">
+                    <div class="section-icon">
+                        <i class="fas fa-tags"></i>
+                    </div>
+                    Precificação das Peças
+                </div>
+                <div class="section-content">
+                    <ol class="pricing-list">
+                        <li>
+                            Primeiro passo: Enviar fotos das peças no contato disponível para avaliarmos modelo e
+                            condição.
+                        </li>
+                        <li>
+                            Segundo passo: Definição do preço de venda. Neste momento entraremos em contato para
+                            negociação e definição.
+                        </li>
+                        <li>
+                            Terceiro passo: Pagamento no momento da venda. Entraremos em contato para o repasse da
+                            porcentagem especificada (<span class="highlight">40% do valor</span>). Caso a dona das
+                            peças concorde com a aplicação de descontos em promoções, não haverá alteração nas divisões
+                            de valores.
+                        </li>
+                        <li>
+                            Quarto passo: Disponibilização de uma planilha para acompanhar suas vendas.
+                        </li>
+                    </ol>
+                </div>
+            </div>
+            <div class="section" id="section-pagamento">
+                <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-percent"></i>
                     </div>
@@ -452,34 +603,37 @@
                         <h3 style="margin-bottom: 15px; font-weight: 600;">Divisão dos Valores</h3>
                         <div class="percentage-split">
                             <div class="percentage-item">
-                                <div class="percentage-number" data-target-value="40">0%</div> <div class="percentage-label">Para Você</div>
+                                <div class="percentage-number" data-target-value="40">0%</div>
+                                <div class="percentage-label">Para Você</div>
                             </div>
                             <div class="percentage-item">
-                                <div class="percentage-number" data-target-value="60">0%</div> <div class="percentage-label">Para o Brechó</div>
+                                <div class="percentage-number" data-target-value="60">0%</div>
+                                <div class="percentage-label">Para o Brechó</div>
                             </div>
                         </div>
                     </div>
                     <p class="text-content">
-                        A cada venda, você recebe <span class="highlight">40% do valor</span>. Os 60% restantes ficam com o brechó para cobrir os custos operacionais, que incluem:
+                        A cada venda, você recebe <span class="highlight">40% do valor</span>. Os 60% restantes ficam
+                        com o brechó para cobrir os custos operacionais, que incluem:
                     </p>
                     <ul class="requirement-list">
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Preparação das roupas: lavagem, secagem e uso de produtos de limpeza adequados.
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Marketing da peça:
+                            divulgação para atrair compradores.
                         </li>
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Marketing da peça: divulgação para atrair compradores.
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Logística de venda: todo
+                            o processo de venda, embalagem e entrega para outros clientes.
                         </li>
                         <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Logística de venda: todo o processo de venda e entrega para outros clientes.
-                        </li>
-                        <li>
-                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Manutenção do espaço: custos de aluguel, luz, água e demais despesas.
+                            <span class="list-icon"><i class="fas fa-check-circle"></i></span> Custos adicionais
                         </li>
                     </ul>
                 </div>
             </div>
 
-            <div class="section" id="section-sucesso"> <div class="section-title">
+            <div class="section" id="section-sucesso">
+                <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-chart-line"></i>
                     </div>
@@ -491,12 +645,12 @@
                         <div class="stats-label">Peças Vendidas com Sucesso</div>
                     </div>
                     <p class="text-content" style="margin-top: 15px;">
-                        Já vendemos mais de <span class="highlight">200 peças</span> em regime de consignado, provando que nosso sistema funciona e gera resultados reais para nossas parceiras!
+                        Já vendemos mais de <span class="highlight">200 peças</span> em regime de consignado!
                     </p>
                 </div>
             </div>
 
-            <div class="section" id="section-clientes"> 
+            <div class="section" id="section-clientes">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-comment-dots"></i>
@@ -505,21 +659,24 @@
                 </div>
                 <div class="section-content">
                     <div class="testimonial">
-                        <p class="testimonial-text">"Coloquei 10 peças no brechó e já consegui vender 7! O dinheiro extra veio na hora certa e minhas roupas tiveram uma segunda chance."</p>
+                        <p class="testimonial-text">"Coloquei 10 peças no brechó e já consegui vender 7! O dinheiro
+                            extra veio na hora certa e minhas roupas tiveram uma segunda chance."</p>
                         <p class="testimonial-author">- Maria Silva</p>
                     </div>
                     <div class="testimonial">
-                        <p class="testimonial-text">"Adorei a experiência! Além de ganhar dinheiro, senti que estava contribuindo para um consumo mais consciente."</p>
+                        <p class="testimonial-text">"Adorei a experiência! Além de ganhar dinheiro, senti que estava
+                            contribuindo para um consumo mais consciente."</p>
                         <p class="testimonial-author">- Ana Costa</p>
                     </div>
                     <div class="testimonial">
-                        <p class="testimonial-text">"Processo super fácil e transparente. Recebo relatórios das vendas e o pagamento sempre em dia!"</p>
+                        <p class="testimonial-text">"Processo super fácil e transparente. Recebo relatórios das vendas e
+                            o pagamento sempre em dia!"</p>
                         <p class="testimonial-author">- Julia Santos</p>
                     </div>
                 </div>
             </div>
 
-            <div class="section" id="section-calculadora"> 
+            <div class="section" id="section-calculadora">
                 <div class="section-title">
                     <div class="section-icon">
                         <i class="fas fa-calculator"></i>
@@ -528,17 +685,12 @@
                 </div>
                 <div class="section-content">
                     <div class="calculator">
-                        <label for="preco" style="display: block; margin-bottom: 10px; font-weight: 600; color: #a565e1;">
+                        <label for="preco"
+                            style="display: block; margin-bottom: 10px; font-weight: 600; color: #a565e1;">
                             Digite o valor de venda da sua peça:
                         </label>
-                        <input 
-                            type="number" 
-                            id="preco" 
-                            class="calculator-input" 
-                            placeholder="Ex: 50,00" 
-                            step="0.01"
-                            oninput="calcularGanho()"
-                        >
+                        <input type="number" id="preco" class="calculator-input" placeholder="Ex: 50,00" step="0.01"
+                            oninput="calcularGanho()">
                         <div class="calculator-result" id="resultado" style="display: none;">
                             <div class="result-value" id="valorGanho">R$ 0,00</div>
                             <div class="result-label">Você vai receber (40%)</div>
@@ -547,7 +699,7 @@
                 </div>
             </div>
 
-            <button class="cta-button" onclick="window.location.href='#contato'">
+            <button class="cta-button" onclick="enviarWhatsApp()">
                 Quero Começar Agora!
             </button>
         </div>
@@ -558,7 +710,7 @@
             const preco = parseFloat(document.getElementById('preco').value);
             const resultado = document.getElementById('resultado');
             const valorGanho = document.getElementById('valorGanho');
-            
+
             if (preco && preco > 0) {
                 const ganho = preco * 0.4;
                 valorGanho.textContent = `R$ ${ganho.toFixed(2).replace('.', ',')}`;
@@ -591,9 +743,9 @@
             }, stepTime);
         }
 
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const sections = document.querySelectorAll('.section');
-            
+
             // Observer para animações gerais de section (fadeInUp)
             const generalObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -602,7 +754,7 @@
                     }
                 });
             }, { threshold: 0.2 }); // Dispara quando 20% da seção está visível
-            
+
             sections.forEach(section => {
                 generalObserver.observe(section);
             });
@@ -613,7 +765,7 @@
 
             if (paymentSection) {
                 const percentageNumbers = paymentSection.querySelectorAll('.percentage-number');
-                
+
                 const paymentObserver = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
                         if (entry.isIntersecting && !paymentAnimationTriggered) {
@@ -622,7 +774,7 @@
                                 // Inicia a animação de contagem para cada porcentagem
                                 animateNumberCount(numberElement, 0, targetValue, 1000, '%'); // Anima de 0 até o valor alvo em 1 segundo
                             });
-                            
+
                             paymentAnimationTriggered = true; // Define a flag como true
                             paymentObserver.unobserve(entry.target); // Para de observar após animar
                         }
@@ -653,6 +805,14 @@
                 successObserver.observe(successSection);
             }
         });
+
+        function enviarWhatsApp() {
+            const numeroTelefone = "553599902803"; // Seu número de WhatsApp com DDI e DDD
+            const mensagem = encodeURIComponent("Oi, quero entender como é o consignado.");
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=${numeroTelefone}&text=${mensagem}`;
+            window.open(whatsappUrl, '_blank');
+        }
     </script>
 </body>
+
 </html>
